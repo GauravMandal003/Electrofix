@@ -1,0 +1,189 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents an ElectroFix customer profile registered through Firebase Authentication.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "avatar": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "createdAt"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "An appointment booked by a registered user for appliance repair/installation.",
+      "type": "object",
+      "properties": {
+        "bookingId": { "type": "string" },
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "serviceId": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "preferredDate": { "type": "string" },
+        "preferredTimeSlot": { "type": "string" },
+        "country": { "type": "string" },
+        "state": { "type": "string" },
+        "city": { "type": "string" },
+        "address": { "type": "string" },
+        "pinCode": { "type": "string" },
+        "instructions": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Confirmed", "Completed", "Cancelled", "Technician Assigned", "On The Way", "Service Started"] },
+        "technician": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["bookingId", "userId", "fullName", "phone", "email", "serviceId", "serviceName", "preferredDate", "preferredTimeSlot", "country", "state", "city", "address", "pinCode", "status", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A spare part or appliance sold in the shop.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "stock": { "type": "integer" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "warranty": { "type": "string" },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "brand", "category", "price", "stock", "image"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "An ecommerce product purchase order.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "orderStatus": { "type": "string" },
+        "shippingDetails": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "items", "totalAmount", "paymentMethod", "paymentStatus", "orderStatus", "shippingDetails", "createdAt"]
+    },
+    "UsedProduct": {
+      "title": "UsedProduct",
+      "description": "Sell Used appliance listing submission.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "fullName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "applianceType": { "type": "string" },
+        "brand": { "type": "string" },
+        "modelNumber": { "type": "string" },
+        "yearsUsed": { "type": "number" },
+        "condition": { "type": "string" },
+        "askingPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "images": { "type": "array" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected", "Purchased"] },
+        "inspectionStatus": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "fullName", "applianceType", "brand", "condition", "askingPrice", "status", "createdAt"]
+    },
+    "Technician": {
+      "title": "Technician",
+      "description": "ElectroFix service staff details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "rating": { "type": "number" },
+        "status": { "type": "string" },
+        "areas": { "type": "string" },
+        "jobs": { "type": "integer" }
+      },
+      "required": ["id", "name", "status"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer feedback on services or products.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "targetId": { "type": "string" },
+        "targetType": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "rating", "comment", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "Admin push notification broadcast records.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "targetUsers": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "body", "targetUsers", "createdAt"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Promotional discounts.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "discount": { "type": "number" },
+        "limit": { "type": "integer" },
+        "used": { "type": "integer" },
+        "active": { "type": "boolean" },
+        "expiry": { "type": "string" }
+      },
+      "required": ["code", "discount", "limit", "active"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Hospital/Company profile metadata configuration.",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "contactEmail": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "address": { "type": "string" },
+        "socialFb": { "type": "string" },
+        "aboutUsText": { "type": "string" },
+        "bannerImages": { "type": "array" },
+        "logoUrl": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "User profiles." },
+    "/bookings/{bookingId}": { "schema": "Booking", "description": "Service appointments." },
+    "/products/{productId}": { "schema": "Product", "description": "Shop products." },
+    "/orders/{orderId}": { "schema": "Order", "description": "Store orders." },
+    "/usedProducts/{id}": { "schema": "UsedProduct", "description": "Sell Used listing submissions." },
+    "/technicians/{techId}": { "schema": "Technician", "description": "Technicians details." },
+    "/reviews/{reviewId}": { "schema": "Review", "description": "Product and service reviews." },
+    "/notifications/{notificationId}": { "schema": "Notification", "description": "Notification logs." },
+    "/coupons/{couponId}": { "schema": "Coupon", "description": "Promotional codes." },
+    "/settings/{settingId}": { "schema": "Settings", "description": "Site profile configuration settings." }
+  }
+}

@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == "gaurav00@gmail.com" || 
+        request.auth.token.email == "mandalgaurav775@gmail.com"
+      );
+    }
+
+    // User collection rules
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Bookings collection rules
+    match /bookings/{bookingId} {
+      allow read, write: if true;
+    }
+
+    // Products collection rules
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Orders collection rules
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+
+    // Used Products / listings collection rules
+    match /usedProducts/{id} {
+      allow read, write: if true;
+    }
+
+    match /usedlistings/{id} {
+      allow read, write: if true;
+    }
+
+    // Technicians collection rules
+    match /technicians/{techId} {
+      allow read, write: if true;
+    }
+
+    // Reviews collection rules
+    match /reviews/{reviewId} {
+      allow read, write: if true;
+    }
+
+    // Notifications collection rules
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+
+    // Coupons collection rules
+    match /coupons/{couponId} {
+      allow read, write: if true;
+    }
+
+    // Reports collection rules
+    match /reports/{reportId} {
+      allow read, write: if true;
+    }
+
+    // Settings collection rules
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+  }
+}

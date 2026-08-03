@@ -1,0 +1,6 @@
+{
+  "name": "ElectroFix",
+  "description": "Professional full-stack website for ElectroFix, featuring a complete Shop module with Express and Firebase Firestore, alongside certified repair services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
